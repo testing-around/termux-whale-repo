@@ -1,0 +1,15 @@
+Package: whale-agent
+Version: 1.0.0
+Architecture: all
+Maintainer: Carbon <carbon@whale-agent.io>
+Installed-Size: 16
+Section: utils
+Priority: optional
+Description: Whale agent for Termux
+ A custom tool for managing Termux operations.
+ .
+ Features:
+  - Lightning-fast terminal greetings
+  - Whale-powered productivity
+  - 100% open source
+Homepage: https://github.com/Carbon/termux-whale-repo

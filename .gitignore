@@ -1,0 +1,21 @@
+# Generated .deb packages
+*.deb
+
+# Generated APT repository (rebuilt by CI)
+termux-repo/repo/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
