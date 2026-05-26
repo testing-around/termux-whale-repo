@@ -1,9 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # install.sh -- Whale Agent one-liner installer for Termux
-# Usage: curl -sL https://YOUR_USERNAME.github.io/termux-whale-repo/install.sh | bash
+# Usage: curl -sL https://testing-around.github.io/termux-whale-repo/install.sh | bash
 
 set -e
-REPO_URL="https://YOUR_USERNAME.github.io/termux-whale-repo"
+REPO_URL="https://testing-around.github.io/termux-whale-repo"
 PACKAGE_NAME="whale-agent"
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; BOLD='\033[1m'; NC='\033[0m'
 info() { printf "${CYAN}%s${NC}\n" "$*"; }
