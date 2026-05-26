@@ -180,6 +180,13 @@ SHA256:
     print(f"  Arches:   {', '.join(ARCHES)}")
     print(f"  Release:  {release_path}")
     
+    # Copy .deb files to repo root too (for APT compatibility)
+    for info in all_info:
+        src = os.path.join(DEBS_DIR, info['filename'])
+        dst = os.path.join(REPO_DIR, info['filename'])
+        shutil.copy2(src, dst)
+        print(f"  Copied to root: {info['filename']}")
+
     # List final structure
     print("\n=== Final Structure ===")
     for root, dirs, files in os.walk(REPO_DIR):

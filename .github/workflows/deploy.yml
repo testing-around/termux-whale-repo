@@ -58,6 +58,7 @@ jobs:
           cp README.md termux-repo/repo/
           cp DEPLOY_CHECKLIST.md termux-repo/repo/
           cp TEST_PLAN.md termux-repo/repo/
+          cp termux-repo/debs/*.deb termux-repo/repo/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
