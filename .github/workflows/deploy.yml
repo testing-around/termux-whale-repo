@@ -38,13 +38,31 @@ jobs:
       - name: Build .deb
         run: |
           chmod +x whale-agent/data/data/com.termux/files/usr/bin/whale
-          dpkg-deb --build whale-agent
+          dpkg-deb -Zgzip --build whale-agent
+          echo "=== .deb contents ==="
+          dpkg-deb --contents whale-agent.deb
+          echo "=== .deb info ==="
+          dpkg-deb --info whale-agent.deb
           mkdir -p termux-repo/debs
           mv whale-agent.deb termux-repo/debs/
 
       - name: Generate APT repo
         run: |
+          echo "=== Debug: .deb file ==="
+          file termux-repo/debs/whale-agent.deb
+          python3 -c "
+import tarfile, sys
+try:
+    # .deb is ar archive, try reading control
+    import subprocess
+    r = subprocess.run(['dpkg-deb', '--info', 'termux-repo/debs/whale-agent.deb'], capture_output=True, text=True)
+    print('stdout:', r.stdout[:500])
+    print('stderr:', r.stderr[:500])
+except Exception as e:
+    print(f'Error: {e}')
+"
           termux-apt-repo termux-repo/debs termux-repo/repo stable main
+          echo "=== Generated structure ==="
           find termux-repo/repo -type f
 
       - name: Setup Pages
