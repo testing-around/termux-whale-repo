@@ -31,14 +31,13 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install termux-apt-repo
           sudo apt-get update
-          sudo apt-get install -y dpkg xz-utils
+          sudo apt-get install -y dpkg
 
       - name: Build .deb
         run: |
           chmod +x whale-agent/data/data/com.termux/files/usr/bin/whale
-          dpkg-deb -Zgzip --build whale-agent
+          dpkg-deb --build whale-agent
           echo "=== .deb contents ==="
           dpkg-deb --contents whale-agent.deb
           echo "=== .deb info ==="
@@ -48,22 +47,7 @@ jobs:
 
       - name: Generate APT repo
         run: |
-          echo "=== Debug: .deb file ==="
-          file termux-repo/debs/whale-agent.deb
-          python3 -c "
-import tarfile, sys
-try:
-    # .deb is ar archive, try reading control
-    import subprocess
-    r = subprocess.run(['dpkg-deb', '--info', 'termux-repo/debs/whale-agent.deb'], capture_output=True, text=True)
-    print('stdout:', r.stdout[:500])
-    print('stderr:', r.stderr[:500])
-except Exception as e:
-    print(f'Error: {e}')
-"
-          termux-apt-repo termux-repo/debs termux-repo/repo stable main
-          echo "=== Generated structure ==="
-          find termux-repo/repo -type f
+          python3 build_repo.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
